@@ -4,4 +4,11 @@
     <a href="https://katsis.net" id="back-to-main">
         <img src="img/logo.svg"/>
     </a>
+    <div id="images-container">
+    {% for img in images %}
+        <a href="?id={{ img.id }}" class="image">
+            <img src="data/thumbnails/{{ img.id }}.{{ img.extension }}"/>
+        </a>
+    {% endfor %}
+    </div>
 {% endblock %}

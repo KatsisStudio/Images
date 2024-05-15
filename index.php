@@ -8,4 +8,15 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
-echo $twig->render("index.html.twig", []);
+
+$metadata = json_decode(file_get_contents("data/info.json"), true);
+$images = [];
+
+foreach ($metadata as $info)
+{
+    array_push($images, [ "id" => $info["id"], "extension" => $info["format"]]);
+}
+
+echo $twig->render("index.html.twig", [
+    "images" => $images
+]);

@@ -9,6 +9,30 @@ body {
     margin: 0;
 }
 
+#back-to-main {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
 #back-to-main > img {
-    width: 50px;
+    width: 35px;
+}
+
+.image {
+    width: 200px;
+    text-align: center;
+}
+
+.image img {
+    max-height: 300px;
+    width: 200px;
+}
+
+#images-container {
+    margin: 2em 3em;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
