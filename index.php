@@ -10,7 +10,7 @@ $twig = new Environment($loader);
 
 $metadata = json_decode(file_get_contents("data/info.json"), true);
 
-function showAll()
+function showAll($twig, $metadata)
 {
     $images = [];
     
@@ -36,16 +36,17 @@ if (isset($_GET["id"]))
                 "css" => "page",
                 "metadata" => $info
             ]);
+            $isOk = true;
             break;
         }
     }
 
     if (!$isOk)
     {
-        showAll();
+        showAll($twig, $metadata);
     }
 }
 else
 {
-    showAll();
+    showAll($twig, $metadata);
 }
