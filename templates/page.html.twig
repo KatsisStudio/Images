@@ -1,6 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <a href="/">Back</a><br>
-    <img src="data/images/{{ metadata.id }}.{{ metadata.format }}"/>
+    <div class="flex">
+        <div id="info">
+            <a href="/">Back</a>
+            <div>
+                <h2>Authors</h2>
+                {{ metadata.author | title }}
+                <h2>Rating</h2>
+                {% if rating == 2 %}
+                Explicit
+                {% elseif rating == 1 %}
+                Questionnable
+                {% elseif rating == 0 %}
+                Safe
+                {% endif %}
+                <h2>Tags</h2>
+                {{ metadata.tags.character.racial_attributes | join("<br>") | raw }}<br>
+                {{ metadata.tags.character.attributes | join("<br>") | raw }}<br>
+                {{ metadata.tags.pose | join("<br>") | raw }}<br>
+                {{ metadata.tags.clothes | join("<br>") | raw }}<br>
+                {{ metadata.tags.sex | join("<br>") | raw }}<br>
+                {{ metadata.tags.others | join("<br>") | raw }}
+                {% if metadata.text is not null %}
+                <h2>Text</h2>
+                {{ metadata.text.content | join("<br>") | raw }}
+                {% endif %}
+                {% if metadata.comment is not null %}
+                <h2>Comment</h2>
+                {{ metadata.comment }}
+                {% endif %}
+            </div>
+        </div>
+        <div id="image-container">
+            <img src="data/images/{{ metadata.id }}.{{ metadata.format }}"/>
+        </div>
+    </div>
 {% endblock %}
