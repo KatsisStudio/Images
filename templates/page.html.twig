@@ -16,11 +16,11 @@
                 Safe
                 {% endif %}
                 <h2>Tags</h2>
-                {{ metadata.tags.character.racial_attributes | join("<br>") | raw }}<br>
-                {{ metadata.tags.character.attributes | join("<br>") | raw }}<br>
-                {{ metadata.tags.pose | join("<br>") | raw }}<br>
+                {{ metadata.tags.characters.racial_attributes | join("<br>") | raw }}<br>
+                {{ metadata.tags.characters.attributes | join("<br>") | raw }}<br>
+                {{ metadata.tags.poses | join("<br>") | raw }}<br>
                 {{ metadata.tags.clothes | join("<br>") | raw }}<br>
-                {{ metadata.tags.sex | join("<br>") | raw }}<br>
+                {{ metadata.tags.sexes | join("<br>") | raw }}<br>
                 {{ metadata.tags.others | join("<br>") | raw }}
                 {% if metadata.text is not null %}
                 <h2>Text</h2>
