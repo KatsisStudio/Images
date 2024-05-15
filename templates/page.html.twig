@@ -8,11 +8,11 @@
                 <h2>Authors</h2>
                 {{ metadata.author | title }}
                 <h2>Rating</h2>
-                {% if rating == 2 %}
+                {% if metadata.rating == 2 %}
                 Explicit
-                {% elseif rating == 1 %}
+                {% elseif metadata.rating == 1 %}
                 Questionnable
-                {% elseif rating == 0 %}
+                {% elseif metadata.rating == 0 %}
                 Safe
                 {% endif %}
                 <h2>Tags</h2>
