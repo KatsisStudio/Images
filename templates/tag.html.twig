@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h2>{{ tag.name | title | replace({'_': " "}) }}</h2>
+    <h2>{{ name | title | replace({'_': " "}) }}</h2>
     <p>
         {{tag.definition}}
     </p>

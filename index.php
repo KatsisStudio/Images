@@ -9,6 +9,7 @@ $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
 $metadata = json_decode(file_get_contents("data/info.json"), true);
+$tags = json_decode(file_get_contents("data/tags.json"), true);
 
 function showAll($twig, $metadata)
 {
@@ -29,9 +30,10 @@ if (isset($_GET["id"]))
 {
     $isOk = false;
 
-    foreach ($metadata as $info) {
-        if ($_GET["id"] === $info["id"]) {
-            
+    foreach ($metadata as $info)
+    {
+        if ($_GET["id"] === $info["id"])
+        {
             echo $twig->render("page.html.twig", [
                 "css" => "page",
                 "metadata" => $info
@@ -50,9 +52,8 @@ else if (isset($_GET["tag"]))
 {
     $isOk = false;
 
-    $tags = json_decode(file_get_contents("data/tags.json"), true);
-    foreach ($tags as $info) {
-        if ($_GET["tag"] === $info["name"]) {
+    foreach ($tags as $key => $info) {
+        if ($_GET["tag"] === $key) {
             // For all ids, correct the image field to include the extension
             
             for ($i = 0; $i < count($info["images"]); $i++)
@@ -73,6 +74,7 @@ else if (isset($_GET["tag"]))
             
             echo $twig->render("tag.html.twig", [
                 "css" => "tag",
+                "name" => $key,
                 "tag" => $info
             ]);
             $isOk = true;
