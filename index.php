@@ -26,6 +26,10 @@ function showAll($twig, $metadata)
     ]);
 }
 
+function  getTagCount($tag, $tags) {
+    return [ "name" => $tag, "count" => count($tags[$tag]["images"]) ];
+}
+
 if (isset($_GET["id"]))
 {
     $isOk = false;
@@ -34,6 +38,23 @@ if (isset($_GET["id"]))
     {
         if ($_GET["id"] === $info["id"])
         {
+            $tags = [
+                "authors" => [
+                    getTagCount("author_" . $info["author"], $tags),
+                ],
+                "parodies" => array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["parodies"]),
+                "others" => array_merge(
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["racial_attributes"]),
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["attributes"]),
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["poses"]),
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["clothes"]),
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["sexes"]),
+                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["others"])
+                ) 
+            ];
+
+            $info["tags_cleaned"] = $tags;
+
             echo $twig->render("page.html.twig", [
                 "css" => "page",
                 "metadata" => $info
