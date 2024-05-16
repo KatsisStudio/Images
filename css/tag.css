@@ -1,0 +1,15 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#image-container {
+    width: 90%;
+    text-align: center;
+}
+
+#image-container img {
+    max-width: 100%;
+    max-height: 90vh;
+}

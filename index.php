@@ -46,6 +46,45 @@ if (isset($_GET["id"]))
         showAll($twig, $metadata);
     }
 }
+else if (isset($_GET["tag"]))
+{
+    $isOk = false;
+
+    $tags = json_decode(file_get_contents("data/tags.json"), true);
+    foreach ($tags as $info) {
+        if ($_GET["tag"] === $info["name"]) {
+            // For all ids, correct the image field to include the extension
+            
+            for ($i = 0; $i < count($info["images"]); $i++)
+            {
+                $img = $info["images"][$i];
+                foreach ($metadata as $m)
+                {
+                    if ($img == $m["id"])
+                    {
+                        $info["images"][$i] = [
+                            "id" => $img,
+                            "extension" => $m["format"]
+                        ];
+                        break;
+                    }
+                }
+            }
+            
+            echo $twig->render("tag.html.twig", [
+                "css" => "tag",
+                "tag" => $info
+            ]);
+            $isOk = true;
+            break;
+        }
+    }
+
+    if (!$isOk)
+    {
+        showAll($twig, $metadata);
+    }
+}
 else
 {
     showAll($twig, $metadata);

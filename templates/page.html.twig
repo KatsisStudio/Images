@@ -16,12 +16,12 @@
                 Safe
                 {% endif %}
                 <h2>Tags</h2>
-                {{ metadata.tags.characters.racial_attributes | join("<br>") | raw }}<br>
-                {{ metadata.tags.characters.attributes | join("<br>") | raw }}<br>
-                {{ metadata.tags.poses | join("<br>") | raw }}<br>
-                {{ metadata.tags.clothes | join("<br>") | raw }}<br>
-                {{ metadata.tags.sexes | join("<br>") | raw }}<br>
-                {{ metadata.tags.others | join("<br>") | raw }}
+                {{ metadata.tags.characters.racial_attributes | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}<br>
+                {{ metadata.tags.characters.attributes | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}<br>
+                {{ metadata.tags.poses | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}<br>
+                {{ metadata.tags.clothes | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}<br>
+                {{ metadata.tags.sexes | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}<br>
+                {{ metadata.tags.others | map(x => "<a href=\"?tag=#{x}\">#{x | title | replace({'_': " "})}</a>") | join("<br>") | raw }}
                 {% if metadata.text is not null %}
                 <h2>Text</h2>
                 {{ metadata.text.content | join("<br>") | raw }}
