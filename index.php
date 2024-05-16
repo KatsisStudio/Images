@@ -46,7 +46,6 @@ if (isset($_GET["id"]))
                 "parodies" => array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["parodies"]),
                 "others" => array_merge(
                     array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, array_keys($info["tags"]["characters"]["sexes"])),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, array_keys($info["tags"]["characters"]["races"])),
                     array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["racial_attributes"]),
                     array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["attributes"]),
                     array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["poses"]),
