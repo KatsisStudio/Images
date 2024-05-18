@@ -11,6 +11,11 @@ $twig = new Environment($loader);
 $metadata = json_decode(file_get_contents("data/info.json"), true);
 $tags = json_decode(file_get_contents("data/tags.json"), true);
 
+$json = isset($_GET["json"]) && $_GET["json"] === "1";
+if ($json) {
+    header('Content-Type: application/json; charset=utf-8');
+}
+
 function showAll($twig, $metadata)
 {
     $images = [];
@@ -20,10 +25,14 @@ function showAll($twig, $metadata)
         array_push($images, [ "id" => $info["id"], "extension" => $info["format"]]);
     }
     
-    echo $twig->render("index.html.twig", [
-        "css" => "index",
-        "images" => $images
-    ]);
+    if (isset($_GET["json"]) && $_GET["json"] === "1") {
+        echo json_encode($images);
+    } else {
+        echo $twig->render("index.html.twig", [
+            "css" => "index",
+            "images" => $images
+        ]);
+    }
 }
 
 function  getTagCount($tag, $tags) {
@@ -56,11 +65,17 @@ if (isset($_GET["id"]))
             ];
 
             $info["tags_cleaned"] = $tags;
+            unset($info["tags"]);
+            unset($info["author"]);
 
-            echo $twig->render("page.html.twig", [
-                "css" => "page",
-                "metadata" => $info
-            ]);
+            if ($json) {
+                echo json_encode($info);
+            } else {
+                echo $twig->render("page.html.twig", [
+                    "css" => "page",
+                    "metadata" => $info
+                ]);
+            }
             $isOk = true;
             break;
         }
@@ -95,11 +110,18 @@ else if (isset($_GET["tag"]))
                 }
             }
             
-            echo $twig->render("tag.html.twig", [
-                "css" => "tag",
-                "name" => $key,
-                "tag" => $info
-            ]);
+            if ($json) {
+                echo json_encode([
+                    "name" => $key,
+                    "tag" => $info
+                ]);
+            } else {
+                echo $twig->render("tag.html.twig", [
+                    "css" => "tag",
+                    "name" => $key,
+                    "tag" => $info
+                ]);
+            }
             $isOk = true;
             break;
         }
