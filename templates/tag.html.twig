@@ -9,7 +9,7 @@
     <div id="images-container">
     {% for img in tag.images %}
         <a href="?id={{ img.id }}" class="image">
-            <img src="data/thumbnails/{{ img.id }}.{{ img.extension }}"/>
+            <img src="data/thumbnails/{{ img.id }}.{{ img.format }}"/>
         </a>
     {% endfor %}
     </div>

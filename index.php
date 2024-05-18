@@ -22,7 +22,7 @@ function showAll($twig, $metadata)
     
     foreach ($metadata as $info)
     {
-        array_push($images, [ "id" => $info["id"], "extension" => $info["format"]]);
+        array_push($images, [ "id" => $info["id"], "format" => $info["format"]]);
     }
     
     if (isset($_GET["json"]) && $_GET["json"] === "1") {
@@ -103,7 +103,7 @@ else if (isset($_GET["tag"]))
                     {
                         $info["images"][$i] = [
                             "id" => $img,
-                            "extension" => $m["format"]
+                            "format" => $m["format"]
                         ];
                         break;
                     }
