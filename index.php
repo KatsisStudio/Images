@@ -25,7 +25,7 @@ function showAll($twig, $metadata)
 {
     $images = [];
     
-    foreach ($metadata as $info)
+    foreach (array_reverse($metadata) as $info)
     {
         array_push($images, [ "id" => $info["id"], "format" => $info["format"]]);
     }
