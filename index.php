@@ -56,17 +56,9 @@ if ($target === "i")
                 "authors" => [
                     getTagCount("author_" . $info["author"], $tags),
                 ],
-                "names" => array_map(function($tag) use (&$tags) { return getTagCount("name_" . $tag, $tags); }, $info["tags"]["characters"]["names"]),
+                "names" => array_map(function($tag) use (&$tags) { return getTagCount("name_" . $tag, $tags); }, $info["tags"]["characters"]),
                 "parodies" => array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["parodies"]),
-                "others" => array_merge(
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, array_keys($info["tags"]["characters"]["sexes"])),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["racial_attributes"]),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["characters"]["attributes"]),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["poses"]),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["clothes"]),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["sexes"]),
-                    array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["others"])
-                ) 
+                "others" => array_map(function($tag) use (&$tags) { return getTagCount($tag, $tags); }, $info["tags"]["others"])
             ];
 
             $info["tags_cleaned"] = $tags;
