@@ -8,6 +8,11 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
+$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$target = count($urlData) > 0 ? strtolower($urlData[0]) : null;
+$value = count($urlData) > 0 ? $urlData[1] : null;
+if ($value == NULL) $target = NULL; // We can't have a target without a value
+
 $metadata = json_decode(file_get_contents("data/info.json"), true);
 $tags = json_decode(file_get_contents("data/tags.json"), true);
 
@@ -39,13 +44,13 @@ function  getTagCount($tag, $tags) {
     return [ "name" => $tag, "count" => count($tags[$tag]["images"]) ];
 }
 
-if (isset($_GET["id"]))
+if ($target === "i")
 {
     $isOk = false;
 
     foreach ($metadata as $info)
     {
-        if ($_GET["id"] === $info["id"])
+        if ($value === $info["id"])
         {
             $tags = [
                 "authors" => [
@@ -86,12 +91,12 @@ if (isset($_GET["id"]))
         showAll($twig, $metadata);
     }
 }
-else if (isset($_GET["tag"]))
+else if ($target === "t")
 {
     $isOk = false;
 
     foreach ($tags as $key => $info) {
-        if ($_GET["tag"] === $key) {
+        if ($value === $key) {
             // For all ids, correct the image field to include the extension
             
             for ($i = 0; $i < count($info["images"]); $i++)
