@@ -78,7 +78,8 @@ if ($target === "i")
             } else {
                 echo $twig->render("page.html.twig", [
                     "css" => "page",
-                    "metadata" => $info
+                    "metadata" => $info,
+                    "isimage" => true
                 ]);
             }
             $isOk = true;
