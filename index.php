@@ -8,7 +8,7 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
-$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$urlData = array_filter(explode("/", substr(explode("?", $_SERVER["REQUEST_URI"])[0], 1)));
 $target = count($urlData) > 0 ? strtolower($urlData[0]) : null;
 $value = count($urlData) > 0 ? $urlData[1] : null;
 if ($value == NULL) $target = NULL; // We can't have a target without a value
