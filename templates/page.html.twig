@@ -17,12 +17,6 @@
                 {% elseif metadata.rating == 0 %}
                 Safe
                 {% endif %}
-                <h2>Tags</h2>
-                {{ metadata.tags_cleaned.others | map(x => "<a href=\"/t/#{x.name}\">#{x.name | title | replace({'_': " "})}</a> (#{x.count})") | join("<br>") | raw }}
-                {% if metadata.text is not null %}
-                <h2>Text</h2>
-                {{ metadata.text.content | join("<br>") | raw }}
-                {% endif %}
                 {% if metadata.comment is not null %}
                 <h2>Comment</h2>
                 {{ metadata.comment }}
