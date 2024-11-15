@@ -8,12 +8,12 @@
     width: 35px;
 }
 
-.image {
+.iimage {
     width: 200px;
     text-align: center;
 }
 
-.image img {
+.iimage img {
     max-height: 300px;
     max-width: 200px;
 }

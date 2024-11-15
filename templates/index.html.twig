@@ -1,12 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <a href="https://katsis.net" id="back-to-main">
-        <img src="/img/logo.svg"/>
-    </a>
     <div id="images-container">
     {% for img in images %}
-        <a href="/i/{{ img.id }}" class="image">
+        <a href="/i/{{ img.id }}" class="iimage">
             <img src="/data/thumbnails/{{ img.id }}.{{ img.format }}"/>
         </a>
     {% endfor %}

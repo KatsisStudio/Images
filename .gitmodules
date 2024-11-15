@@ -1,3 +1,6 @@
 [submodule "data"]
 	path = data
 	url = https://github.com/KatsisStudio/Images-content
+[submodule "common"]
+	path = common
+	url = https://github.com/KatsisStudio/Website-Common
